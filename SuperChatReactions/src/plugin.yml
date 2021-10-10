@@ -1,0 +1,27 @@
+author: PenguinMan
+description: "Chat Reactions"
+main: me.Penguin.SuperChatReactions.Main
+name: SuperChatReactions
+version: 1.0.0
+depend: []
+api-version: 1.16
+
+commands:
+
+ # a: 
+  #  usage: /<command> []
+   # description: "-"
+    #aliases: []
+
+
+
+permissions: 
+   
+#  a.a:
+ #   default: op
+  #  description: "a"
+    
+#  a.a:
+ #   default: op
+  #  description: "a"
+    
