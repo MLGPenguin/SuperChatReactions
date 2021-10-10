@@ -1,10 +1,12 @@
 package me.Penguin.SuperChatReactions;
 
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -12,6 +14,12 @@ import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 
 public class Main extends JavaPlugin {
+	
+	public static boolean guessing;
+	public static boolean unscramble;
+	public static String word;
+	public static Instant start;
+	
 	
 	public void onEnable() {
 				
@@ -25,12 +33,22 @@ public class Main extends JavaPlugin {
 		
 		config.setup();	
 		
-		new BukkitRunnable() {
-			
+		new BukkitRunnable() {			
 			@Override
 			public void run() {
 				String word = chooseWord();
-				if (shouldUnscramble()) word = scramble(word);
+				Main.word = word;
+				unscramble = shouldUnscramble();
+				if (unscramble) word = scramble(word);
+				Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
+				guessing = true;
+				start = Instant.now();
+				new BukkitRunnable() {					
+					@Override
+					public void run() {
+						guessing = false;
+					}
+				}.runTaskLater(Main.getPlugin(Main.class), config.guessTime);				
 			}
 		}.runTaskTimer(this, config.reactionInterval, config.reactionInterval);
 		

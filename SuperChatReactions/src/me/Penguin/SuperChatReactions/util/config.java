@@ -15,6 +15,7 @@ public class config {
 	public static int reactionInterval;
 	public static List<String> words;
 	public static int unscrambleChance;
+	public static int guessTime;
 	
 	public static void setup() {
 		plugin = Main.getPlugin(Main.class);
@@ -23,6 +24,7 @@ public class config {
 		reactionInterval = getInt("ReactionInterval");
 		words = getStringList("WordList");
 		unscrambleChance = getInt("UnscrambleChance");
+		guessTime = getInt("GuessTime") < reactionInterval ? getInt("GuessTime") : reactionInterval - 1;
 	}
 	
 	private static int getInt(String path) {

@@ -2,6 +2,8 @@
 #Chat Reaction Configuration
 #In seconds (300 seconds -> 5 minutes)
 ReactionInterval: 30
+#The amount of time given to guess the word in seconds (must be less than the ReactionInterval)
+GuessTime: 15
 WordList:
   - akimbo
   - potato

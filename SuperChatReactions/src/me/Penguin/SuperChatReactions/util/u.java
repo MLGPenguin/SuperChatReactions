@@ -43,7 +43,14 @@ public class u {
 	public static String dc(int value) {
 		String pattern = "###,###,###";
 		DecimalFormat decimalFormat = new DecimalFormat(pattern);
-		return decimalFormat.format(value); }
+		return decimalFormat.format(value); 
+	}
+	
+	public static String twoDecimals(double value) {
+		String pattern = "###.##";
+		DecimalFormat df = new DecimalFormat(pattern);
+		return df.format(value);
+	}
 
 	public static List<String> TabCompleter(List<String> commands, String Input){
 		List<String> wordsThatStartWithArg = new ArrayList<>();
