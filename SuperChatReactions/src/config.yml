@@ -1,0 +1,12 @@
+--- 
+#Chat Reaction Configuration
+#In seconds (300 seconds -> 5 minutes)
+ReactionInterval: 30
+WordList:
+  - akimbo
+  - potato
+  - apple
+  - netherite
+  
+# The chance to get a scrambled word, as opposed to a simple 'type this eord' (0-100)%
+UnscrambleChance: 50
