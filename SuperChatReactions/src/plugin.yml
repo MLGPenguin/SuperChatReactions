@@ -8,18 +8,18 @@ api-version: 1.16
 
 commands:
 
- # a: 
-  #  usage: /<command> []
-   # description: "-"
-    #aliases: []
+  chatreactions: 
+    usage: /<command> [reload]
+    description: "chatreaction commands"
+    aliases: []
 
 
 
 permissions: 
    
-#  a.a:
- #   default: op
-  #  description: "a"
+  superchatreactions.admin:
+    default: op
+    description: "admin permissions for super chat reactions"
     
 #  a.a:
  #   default: op

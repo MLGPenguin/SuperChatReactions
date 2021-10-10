@@ -41,6 +41,12 @@ public class config {
 		return cfg.contains(path) ? cfg.getStringList(path) : new ArrayList<>();
 	}
 	
+	
+	public static void reload() {
+		plugin.reloadConfig();
+		cfg = plugin.getConfig();
+		setup();
+	}
 		
 	
 	

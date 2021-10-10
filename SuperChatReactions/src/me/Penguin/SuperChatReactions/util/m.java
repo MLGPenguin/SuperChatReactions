@@ -5,9 +5,10 @@ public class m {
 	// messages
 	private static String prefix = prefix();
 	
-	public static String noPermission, invalidPlayerSelf, unknownCommand;
+	public static String noPermission, invalidPlayerSelf, unknownCommand, reloadedconfig;
 	
 	public static void setup() {
+		reloadedconfig = msg("&7Successfully reloaded config!");
 		noPermission = u.hc(prefix + "&cYou do not have permission to do this"); 
 		invalidPlayerSelf = u.hc(prefix + "&cYou need to be a player to use this command");
 		unknownCommand = u.hc(prefix + "&cUnknown Command");
@@ -23,6 +24,11 @@ public class m {
 	}
 	public static String typedWord(String playername, String word, long milliseconds) { 
 		return u.hc(prefix + "&6" +playername +"&7 typed &6" + word + "&7 in &6" + u.twoDecimals((double) milliseconds/1000) + " seconds!"); 
+	}
+	
+	
+	private static String msg(String msg) {
+		return u.hc(prefix + msg);
 	}
 	
 }
