@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Penguin.SuperChatReactions.util.m;
 
@@ -28,7 +30,10 @@ public class MainListener implements Listener{
 				String name = e.getPlayer().getName();
 				Bukkit.broadcastMessage(Main.unscramble ? m.UnscrambledWord(name, Main.word, timetaken) : m.typedWord(name, Main.word, timetaken));
 				e.setCancelled(true);
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + name + " 1");
+				new BukkitRunnable() {					
+					@Override
+					public void run() { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + name + " 1"); }
+				}.runTask(plugin);				
 			}
 		}
 	}
