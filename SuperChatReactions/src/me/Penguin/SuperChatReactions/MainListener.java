@@ -27,6 +27,7 @@ public class MainListener implements Listener{
 				Main.guessing = false;
 				String name = e.getPlayer().getName();
 				Bukkit.broadcastMessage(Main.unscramble ? m.UnscrambledWord(name, Main.word, timetaken) : m.typedWord(name, Main.word, timetaken));
+				e.setCancelled(true);
 				// rewards
 			}
 		}
