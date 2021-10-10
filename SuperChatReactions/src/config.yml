@@ -1,14 +1,14 @@
 --- 
 #Chat Reaction Configuration
 #In seconds (300 seconds -> 5 minutes)
-ReactionInterval: 30
+ReactionInterval: 300
 #The amount of time given to guess the word in seconds (must be less than the ReactionInterval)
-GuessTime: 15
+GuessTime: 45
 WordList:
   - akimbo
   - potato
   - apple
   - netherite
   
-# The chance to get a scrambled word, as opposed to a simple 'type this eord' (0-100)%
+# The chance to get a scrambled word, as opposed to a simple 'type this word' (0-100)%
 UnscrambleChance: 50
