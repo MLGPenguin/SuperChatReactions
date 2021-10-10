@@ -21,10 +21,16 @@ public class config {
 		plugin = Main.getPlugin(Main.class);
 		cfg = plugin.getConfig();
 				
-		reactionInterval = getInt("ReactionInterval");
+		/**
+		 * in ticks.
+		 */
+		reactionInterval = getInt("ReactionInterval") * 20;
 		words = getStringList("WordList");
 		unscrambleChance = getInt("UnscrambleChance");
-		guessTime = getInt("GuessTime") < reactionInterval ? getInt("GuessTime") : reactionInterval - 1;
+		/**
+		 * in ticks
+		 */
+		guessTime = (getInt("GuessTime") < reactionInterval ? getInt("GuessTime") : reactionInterval - 1) * 20;
 	}
 	
 	private static int getInt(String path) {

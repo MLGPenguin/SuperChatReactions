@@ -14,8 +14,8 @@ public class m {
 	}
 
 	public static String s() { return u.hc(prefix + ""); }
-	public static String typeGlobal(String word) { return u.hc(prefix + "&7First person to type &6" + word + " will win a reward!"); }
-	public static String unscrambleGlobal(String word) { return u.hc(prefix + "&7First person to unscramble &6" + word + " will win a reward!"); }
+	public static String typeGlobal(String word) { return u.hc(prefix + "&7First person to type &6" + word + "&7 will win a reward!"); }
+	public static String unscrambleGlobal(String word) { return u.hc(prefix + "&7First person to unscramble &6" + word + "&7 will win a reward!"); }
 	public static String invalidPlayerOther(String Name) { return u.hc(prefix + "&c" + Name + "&C is not a player"); }
 	public static String prefix() { return u.hc("&8[&7&lSB&6&lZEN &8] | "); }
 	public static String UnscrambledWord(String playername, String word, long milliseconds) { 
