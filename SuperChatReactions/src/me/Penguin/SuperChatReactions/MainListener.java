@@ -28,7 +28,7 @@ public class MainListener implements Listener{
 				String name = e.getPlayer().getName();
 				Bukkit.broadcastMessage(Main.unscramble ? m.UnscrambledWord(name, Main.word, timetaken) : m.typedWord(name, Main.word, timetaken));
 				e.setCancelled(true);
-				// rewards
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + name + " 1");
 			}
 		}
 	}
