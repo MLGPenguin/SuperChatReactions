@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
 		new BukkitRunnable() {			
 			@Override
 			public void run() {
-				word = chooseWord();
+				String word = chooseWord();
 				unscramble = shouldUnscramble();
 				if (unscramble) word = scramble(word);
 				Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
@@ -47,7 +47,7 @@ public class Main extends JavaPlugin {
 					public void run() {
 						boolean unanswered = guessing;
 						guessing = false;
-						if (unanswered) Bukkit.broadcastMessage(m.noGuess(word, unscramble));						
+						if (unanswered) Bukkit.broadcastMessage(m.noGuess(Main.word, unscramble));						
 					}
 				}.runTaskLater(Main.getPlugin(Main.class), config.guessTime);				
 			}
