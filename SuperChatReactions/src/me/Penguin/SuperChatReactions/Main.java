@@ -38,6 +38,7 @@ public class Main extends JavaPlugin {
 			public void run() {
 				String word = chooseWord();
 				unscramble = shouldUnscramble();
+				Main.word = word;
 				if (unscramble) word = scramble(word);
 				Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
 				guessing = true;
