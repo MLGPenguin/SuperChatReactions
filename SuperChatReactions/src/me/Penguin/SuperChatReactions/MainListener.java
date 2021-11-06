@@ -4,6 +4,10 @@ import java.time.Duration;
 import java.time.Instant;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -31,11 +35,37 @@ public class MainListener implements Listener{
 				e.setCancelled(true);
 				new BukkitRunnable() {					
 					@Override
-					public void run() { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + name + " 1"); }
+					public void run() { 
+						
+						win(e.getPlayer());
+					}
 				}.runTask(plugin);				
 			}
 		}
 	}
+	
+	
+	private void win(Player p) {
+		Location spot = p.getLocation();
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + p.getName() + " 1");
+		p.spawnParticle(Particle.VILLAGER_HAPPY, spot, 10, 1, 1, 1);
+		new BukkitRunnable() {		
+			int it = 0;
+			@Override
+			public void run() {
+				if (it == 10) {
+					cancel();
+					return;
+				}
+				p.playSound(spot, Sound.BLOCK_NOTE_BLOCK_BELL, 1, 10);
+				it++;
+			}
+		}.runTaskTimer(plugin, 0, 2);
+		
+		
+	}
+	
+	  
 	
 	
 }
