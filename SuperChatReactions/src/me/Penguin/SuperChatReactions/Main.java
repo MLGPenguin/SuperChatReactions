@@ -36,25 +36,31 @@ public class Main extends JavaPlugin {
 		new BukkitRunnable() {			
 			@Override
 			public void run() {
-				String word = chooseWord();
-				unscramble = shouldUnscramble();
-				Main.word = word;
-				if (unscramble) word = scramble(word);
-				Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
-				guessing = true;
-				start = Instant.now();
+				simulateStartReaction();
 				new BukkitRunnable() {	
 					@Override
 					public void run() {
-						boolean unanswered = guessing;
-						guessing = false;
-						if (unanswered) Bukkit.broadcastMessage(m.noGuess(Main.word, unscramble));						
+						endReaction();
 					}
-				}.runTaskLater(Main.getPlugin(Main.class), config.guessTime);				
+				}.runTaskLater(Main.getPlugin(Main.class), config.guessTime);
 			}
-		}.runTaskTimer(this, config.reactionInterval, config.reactionInterval);
-		
-		
+		}.runTaskTimer(this, config.reactionInterval, config.reactionInterval);		
+	}
+	
+	private void endReaction() {
+		boolean unanswered = guessing;
+		guessing = false;
+		if (unanswered) Bukkit.broadcastMessage(m.noGuess(Main.word, unscramble));	
+	}
+	
+	private void simulateStartReaction() {
+		String word = chooseWord();
+		unscramble = shouldUnscramble();
+		Main.word = word;
+		if (unscramble) word = scramble(word);
+		Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
+		guessing = true;
+		start = Instant.now();
 	}
 	
 	private boolean shouldUnscramble() {
