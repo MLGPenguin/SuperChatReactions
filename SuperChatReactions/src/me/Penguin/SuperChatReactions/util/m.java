@@ -25,6 +25,7 @@ public class m {
 	public static String typedWord(String playername, String word, long milliseconds) { 
 		return u.hc(prefix + "&6" +playername +"&7 typed &6" + word + "&7 in &6" + u.twoDecimals((double) milliseconds/1000) + " seconds!"); 
 	}
+	public static String noGuess(String word, boolean unscramble) { return msg("&7Time's up! No one typed the word correctly in time!" + (unscramble?" The word was &6" + word + "&7!":"")); }
 	
 	
 	private static String msg(String msg) {
