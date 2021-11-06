@@ -53,11 +53,11 @@ public class MainListener implements Listener{
 			int it = 0;
 			@Override
 			public void run() {
-				if (it == 10) {
+				if (it == 3) {
 					cancel();
 					return;
 				}
-				p.playSound(spot, Sound.BLOCK_NOTE_BLOCK_BELL, 1, 10);
+				p.playSound(spot, Sound.BLOCK_NOTE_BLOCK_BELL, 3, 10);
 				it++;
 			}
 		}.runTaskTimer(plugin, 0, 2);
