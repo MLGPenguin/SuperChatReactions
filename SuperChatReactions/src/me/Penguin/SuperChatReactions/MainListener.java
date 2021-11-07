@@ -47,7 +47,7 @@ public class MainListener implements Listener{
 	
 	private void win(Player p) {
 		Location spot = p.getLocation();
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sc givekey Vote " + p.getName() + " 1");
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scrates givekey Vote " + p.getName() + " 1");
 		p.spawnParticle(Particle.VILLAGER_HAPPY, spot, 10, 1, 1, 1);
 		new BukkitRunnable() {		
 			int it = 0;

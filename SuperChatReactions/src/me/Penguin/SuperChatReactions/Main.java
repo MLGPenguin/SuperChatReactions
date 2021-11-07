@@ -55,8 +55,8 @@ public class Main extends JavaPlugin {
 	
 	private void simulateStartReaction() {
 		String word = chooseWord();
-		unscramble = shouldUnscramble();
 		Main.word = word;
+		unscramble = shouldUnscramble();		
 		if (unscramble) word = scramble(word);
 		Bukkit.broadcastMessage(unscramble ? m.unscrambleGlobal(word) : m.typeGlobal(word));
 		guessing = true;
