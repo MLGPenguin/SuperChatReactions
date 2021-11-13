@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import me.Penguin.SuperChatReactions.files.stats;
 import me.Penguin.SuperChatReactions.util.m;
 
 public class MainListener implements Listener{
@@ -46,6 +47,7 @@ public class MainListener implements Listener{
 	
 	
 	private void win(Player p) {
+		stats.addGuessedReaction(p.getUniqueId());
 		Location spot = p.getLocation();
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scrates givekey Vote " + p.getName() + " 1");
 		p.spawnParticle(Particle.VILLAGER_HAPPY, spot, 10, 1, 1, 1);

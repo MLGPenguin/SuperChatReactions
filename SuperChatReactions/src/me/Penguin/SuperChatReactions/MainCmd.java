@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 
+import me.Penguin.SuperChatReactions.files.stats;
 import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 import me.Penguin.SuperChatReactions.util.u;
@@ -26,6 +27,7 @@ public class MainCmd implements TabExecutor {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("reload")) {
 						config.reload();
+						stats.reload();
 						s.sendMessage(m.reloadedconfig);
 						return true;
 					} else s.sendMessage(m.unknownCommand);
@@ -37,8 +39,7 @@ public class MainCmd implements TabExecutor {
 	}
 
 	@Override
-	public List<String> onTabComplete( CommandSender s,  Command cmd, String label,  String[] args) {
-		
+	public List<String> onTabComplete( CommandSender s,  Command cmd, String label,  String[] args) {		
 		if (cmd.getName().equalsIgnoreCase("chatreactions")) {
 			if (s.hasPermission("superchatreactions.admin")) {
 				if (args.length == 1) {

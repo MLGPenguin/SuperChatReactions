@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import me.Penguin.SuperChatReactions.files.stats;
 import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 
@@ -24,6 +25,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 				
 		m.setup();
+		stats.setup();
 		
 		new MainListener(this);
 		new MainCmd(this);		
