@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -99,7 +100,7 @@ public class stats {
 	}
 	
 	public static HashMap<Integer, reaction> getFastest10Reactions() {
-		Collection<reaction> reactions = bestReactions.values();
+		Collection<reaction> reactions = new HashSet<>(bestReactions.values());
 		HashMap<Integer, reaction> fastest = new HashMap<>();
 		while (fastest.size() < 10 && reactions.size() > 0) {
 			reaction r = findFastest(reactions);

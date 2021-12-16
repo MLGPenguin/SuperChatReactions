@@ -9,6 +9,7 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import me.Penguin.SuperChatReactions.files.stats;
 import me.Penguin.SuperChatReactions.util.config;
@@ -38,10 +39,10 @@ public class MainCmd implements TabExecutor {
 						HashMap<Integer, reaction> reactions = stats.getFastest10Reactions();
 						for (int i = 0 ; i < reactions.size() ; i++) {
 							reaction r = reactions.get(i);
-							s.sendMessage("&7" + (i+1) + ": " + r.getName() + " - " + r.getWord() + " [" + u.twoDecimals((double) r.getTime()/1000) + "s]");
+							s.sendMessage(u.cc("&7") + (i+1) + ": " + r.getName() + " - " + r.getWord() + " [" + u.twoDecimals((double) r.getTime()/1000) + "s]");
 						}
 						Instant end = Instant.now();
-						s.sendMessage(u.cc("&7") + Duration.between(start, end).toMillis() +" elapsed");
+						s.sendMessage(u.cc("&7") + Duration.between(start, end).toMillis() +"ms elapsed");
 					} else s.sendMessage(m.unknownCommand);
 				} else s.sendMessage(m.unknownCommand);
 			} else s.sendMessage(m.noPermission);
@@ -55,7 +56,7 @@ public class MainCmd implements TabExecutor {
 		if (cmd.getName().equalsIgnoreCase("chatreactions")) {
 			if (s.hasPermission("superchatreactions.admin")) {
 				if (args.length == 1) {
-					return u.TabCompleter(Arrays.asList("reload"), args[0]);
+					return u.TabCompleter(Arrays.asList("reload", "top"), args[0]);
 				}
 			}
 		}
