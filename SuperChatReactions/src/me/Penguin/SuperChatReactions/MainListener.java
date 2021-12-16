@@ -32,7 +32,7 @@ public class MainListener implements Listener{
 				long timetaken = Duration.between(Main.start, Instant.now()).toMillis();
 				Main.guessing = false;
 				String name = e.getPlayer().getName();
-				reaction reaction = new reaction(Main.word, e.getPlayer().getUniqueId(), timetaken);
+				reaction reaction = new reaction(Main.word, e.getPlayer().getUniqueId(), timetaken, e.getPlayer().getName());
 				Bukkit.broadcastMessage(Main.unscramble ? m.UnscrambledWord(name, Main.word, timetaken) : m.typedWord(name, Main.word, timetaken));
 				e.setCancelled(true);
 				new BukkitRunnable() {					

@@ -9,7 +9,7 @@ api-version: 1.16
 commands:
 
   chatreactions: 
-    usage: /<command> [reload]
+    usage: /<command> [reload, top]
     description: "chatreaction commands"
     aliases: []
 

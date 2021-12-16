@@ -1,6 +1,9 @@
 package me.Penguin.SuperChatReactions;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -30,6 +33,15 @@ public class MainCmd implements TabExecutor {
 						stats.reload();
 						s.sendMessage(m.reloadedconfig);
 						return true;
+					} else if (args[0].equalsIgnoreCase("top")) {
+						Instant start = Instant.now();
+						HashMap<Integer, reaction> reactions = stats.getFastest10Reactions();
+						for (int i = 0 ; i < reactions.size() ; i++) {
+							reaction r = reactions.get(i);
+							s.sendMessage("&7" + (i+1) + ": " + r.getName() + " - " + r.getWord() + " [" + u.twoDecimals((double) r.getTime()/1000) + "s]");
+						}
+						Instant end = Instant.now();
+						s.sendMessage(u.cc("&7") + Duration.between(start, end).toMillis() +" elapsed");
 					} else s.sendMessage(m.unknownCommand);
 				} else s.sendMessage(m.unknownCommand);
 			} else s.sendMessage(m.noPermission);

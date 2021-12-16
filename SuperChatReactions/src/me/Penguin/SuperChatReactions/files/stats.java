@@ -2,10 +2,8 @@ package me.Penguin.SuperChatReactions.files;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -37,7 +35,7 @@ public class stats {
 		for (String x : cfg.getConfigurationSection("").getKeys(false)) {
 			UUID uuid = UUID.fromString(x);
 			guessed.put(uuid, cfg.getInt(x + ".guessed"));
-			bestReactions.put(uuid, new reaction(cfg.getString(x + ".fastestword"), uuid, cfg.getLong(x + ".fastesttime")));
+			bestReactions.put(uuid, new reaction(cfg.getString(x + ".fastestword"), uuid, cfg.getLong(x + ".fastesttime"), cfg.getString(x + ".name")));
 		}
 	}
 	public static void reload() { 
@@ -47,20 +45,20 @@ public class stats {
 	
 	
 	public static void addGuessedReaction(UUID uuid, reaction reaction) { 
-		setGuesses(uuid, getGuesses(uuid)+1); 
-		updateFastestReaction(reaction);
+		addGuessIR(uuid);
+		updateFastestReactionIR(reaction);
+		savePlayerToFile(uuid, true);
 	}
+	// IR = IN RAM
 	public static boolean hasGuesses(UUID uuid) { return guessed.containsKey(uuid); }
 	public static int getGuesses(UUID uuid) { return (hasGuesses(uuid) ? guessed.get(uuid) : 0); }
-	private static void setGuesses(UUID uuid, int amount) { guessed.put(uuid, amount); saveToFileUUIDGuessed(uuid); }
-	
-	public static void updateFastestReaction(reaction reaction) {
+	private static void setGuesses(UUID uuid, int amount) { guessed.put(uuid, amount); }
+	private static void addGuessIR(UUID uuid) { setGuesses(uuid, getGuesses(uuid)+1); }	
+	public static void updateFastestReactionIR(reaction reaction) {
 		reaction old = getFastestReaction(reaction.getUUID());
-		if (old == null || reaction.getTime() < old.getTime()) {
-			bestReactions.put(reaction.getUUID(), reaction);
-			saveToFileUUIDSpeed(reaction.getUUID());			
-		}
-	}
+		if (old == null || reaction.getTime() < old.getTime()) bestReactions.put(reaction.getUUID(), reaction);			
+	}	
+	public void setName(UUID uuid, String name) { cfg.set(uuid.toString() + ".name", name); }
 		
 	public static reaction getFastestReaction(UUID uuid) {
 		if (hasFastestReaction(uuid))
@@ -72,25 +70,17 @@ public class stats {
 		return bestReactions.keySet().contains(uuid);
 	}
 	
-	
-	private static void saveToFileUUIDGuessed(UUID uuid) { 
+	private static void savePlayerToFile(UUID uuid, boolean save) {
 		String x = uuid.toString();
 		cfg.set(x + ".guessed", guessed.get(uuid));
-		saveAsync();
-	}
-	private static void saveToFileUUIDSpeed(UUID uuid) { 
-		String x = uuid.toString();
 		cfg.set(x + ".fastestword", bestReactions.get(uuid).getWord());
 		cfg.set(x + ".fastesttime", bestReactions.get(uuid).getTime());
-		saveAsync();
+		cfg.set(x + ".name", bestReactions.get(uuid).getName());
+		if (save) saveAsync();
 	}
 	
-	private static void saveall() { 
-		for (UUID x : guessed.keySet()) cfg.set(x.toString() + ".guessed", guessed.get(x));		
-		for (UUID x : bestReactions.keySet()) {
-			cfg.set(x.toString() + ".fastestword", bestReactions.get(x).getWord());
-			cfg.set(x.toString() + ".fastesttime", bestReactions.get(x).getTime());
-		}
+	private static void saveall() { 	
+		for (UUID x : bestReactions.keySet()) savePlayerToFile(x, false);		
 		saveAsync();
 	}
 	
