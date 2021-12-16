@@ -32,13 +32,13 @@ public class MainListener implements Listener{
 				long timetaken = Duration.between(Main.start, Instant.now()).toMillis();
 				Main.guessing = false;
 				String name = e.getPlayer().getName();
+				reaction reaction = new reaction(Main.word, e.getPlayer().getUniqueId(), timetaken);
 				Bukkit.broadcastMessage(Main.unscramble ? m.UnscrambledWord(name, Main.word, timetaken) : m.typedWord(name, Main.word, timetaken));
 				e.setCancelled(true);
 				new BukkitRunnable() {					
 					@Override
-					public void run() { 
-						
-						win(e.getPlayer());
+					public void run() {						
+						win(e.getPlayer(), reaction);
 					}
 				}.runTask(plugin);				
 			}
@@ -46,8 +46,8 @@ public class MainListener implements Listener{
 	}
 	
 	
-	private void win(Player p) {
-		stats.addGuessedReaction(p.getUniqueId());
+	private void win(Player p, reaction reaction) {
+		stats.addGuessedReaction(p.getUniqueId(), reaction);
 		Location spot = p.getLocation();
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scrates givekey Vote " + p.getName() + " 1");
 		p.spawnParticle(Particle.VILLAGER_HAPPY, spot, 10, 1, 1, 1);
