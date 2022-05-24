@@ -1,17 +1,12 @@
 package me.Penguin.SuperChatReactions;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 
-import me.Penguin.SuperChatReactions.files.stats;
 import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 import me.Penguin.SuperChatReactions.util.u;
@@ -31,18 +26,11 @@ public class MainCmd implements TabExecutor {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("reload")) {
 						config.reload();
-						stats.reload();
 						s.sendMessage(m.reloadedconfig);
 						return true;
 					} else if (args[0].equalsIgnoreCase("top")) {
-						Instant start = Instant.now();
-						HashMap<Integer, reaction> reactions = stats.getFastest10Reactions();
-						for (int i = 0 ; i < reactions.size() ; i++) {
-							reaction r = reactions.get(i);
-							s.sendMessage(u.cc("&7") + (i+1) + ": " + r.getName() + " - " + r.getWord() + " [" + u.twoDecimals((double) r.getTime()/1000) + "s]");
-						}
-						Instant end = Instant.now();
-						s.sendMessage(u.cc("&7") + Duration.between(start, end).toMillis() +"ms elapsed");
+						s.sendMessage(u.cc("&cThis command is currently disabled, please contact an administrator if you believe this is in error"));
+						return true;
 					} else s.sendMessage(m.unknownCommand);
 				} else s.sendMessage(m.unknownCommand);
 			} else s.sendMessage(m.noPermission);

@@ -45,6 +45,11 @@ public class u {
 		DecimalFormat decimalFormat = new DecimalFormat(pattern);
 		return decimalFormat.format(value); 
 	}
+	public static String dc(long value) {
+		String pattern = "###,###,###";
+		DecimalFormat decimalFormat = new DecimalFormat(pattern);
+		return decimalFormat.format(value); 
+	}
 	
 	public static String twoDecimals(double value) {
 		String pattern = "###.##";

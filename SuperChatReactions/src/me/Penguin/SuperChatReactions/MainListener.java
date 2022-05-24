@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.Penguin.SuperChatReactions.files.stats;
+import me.Penguin.SuperChatReactions.files.ReactionFile;
 import me.Penguin.SuperChatReactions.util.m;
 
 public class MainListener implements Listener{
@@ -29,7 +29,8 @@ public class MainListener implements Listener{
 	public void onChat(AsyncPlayerChatEvent e) {
 		if (Main.guessing) {
 			if (e.getMessage().equalsIgnoreCase(Main.word)) {
-				long timetaken = Duration.between(Main.start, Instant.now()).toMillis();
+				Instant end = Instant.now();
+				long timetaken = Duration.between(Main.start, end).toMillis();
 				Main.guessing = false;
 				String name = e.getPlayer().getName();
 				reaction reaction = new reaction(Main.word, e.getPlayer().getUniqueId(), timetaken, e.getPlayer().getName());
@@ -47,7 +48,8 @@ public class MainListener implements Listener{
 	
 	
 	private void win(Player p, reaction reaction) {
-		stats.addGuessedReaction(p.getUniqueId(), reaction);
+		ReactionFile reactlogs = new ReactionFile();
+		reactlogs.addReaction(reaction);
 		Location spot = p.getLocation();
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scrates givekey Vote " + p.getName() + " 1");
 		p.spawnParticle(Particle.VILLAGER_HAPPY, spot, 10, 1, 1, 1);

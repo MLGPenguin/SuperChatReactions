@@ -1,16 +1,18 @@
 package me.Penguin.SuperChatReactions;
 
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.Penguin.SuperChatReactions.files.stats;
+import me.Penguin.SuperChatReactions.files.ReactionFile;
 import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 
@@ -22,10 +24,18 @@ public class Main extends JavaPlugin {
 	public static Instant start;
 	
 	
-	public void onEnable() {
-				
+	public void onEnable() {				
+		Logger log = this.getLogger();
+		ReactionFile reactionfile = new ReactionFile();
+		Instant Ia = Instant.now();
+		
+		log.info("Preparing...");	
+		
 		m.setup();
-		stats.setup();
+		config.setup();
+		reactionfile.setupWithHeadings("UUID", "Name", "Word", "Time");
+		
+		log.info("Loaded Files");
 		
 		new MainListener(this);
 		new MainCmd(this);		
@@ -33,7 +43,7 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults();
 		saveDefaultConfig();
 		
-		config.setup();	
+			
 		
 		new BukkitRunnable() {			
 			@Override
@@ -47,6 +57,7 @@ public class Main extends JavaPlugin {
 				}.runTaskLater(Main.getPlugin(Main.class), config.guessTime);
 			}
 		}.runTaskTimer(this, config.reactionInterval, config.reactionInterval);		
+		log.info("Loaded SuperChatReactions [" + between(Ia, Instant.now()) + "ms]");
 	}
 	
 	private void endReaction() {
@@ -87,6 +98,8 @@ public class Main extends JavaPlugin {
 		return config.words.get(new Random().nextInt(config.words.size()));
 	}
 	
-	
+	private long between(Instant a, Instant b) {
+		return Duration.between(a, b).toMillis();
+	}
 
 }
