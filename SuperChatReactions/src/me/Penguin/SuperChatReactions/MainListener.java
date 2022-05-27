@@ -11,9 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Penguin.SuperChatReactions.files.ReactionFile;
+import me.Penguin.SuperChatReactions.files.Usermap;
 import me.Penguin.SuperChatReactions.util.m;
 
 public class MainListener implements Listener{
@@ -48,6 +50,7 @@ public class MainListener implements Listener{
 	
 	
 	private void win(Player p, reaction reaction) {
+		//new Usermap().updateUser(p);
 		ReactionFile reactlogs = new ReactionFile();
 		reactlogs.addReaction(reaction);
 		Location spot = p.getLocation();
@@ -64,9 +67,7 @@ public class MainListener implements Listener{
 				p.playSound(spot, Sound.BLOCK_NOTE_BLOCK_BELL, 3, 10);
 				it++;
 			}
-		}.runTaskTimer(plugin, 0, 2);
-		
-		
+		}.runTaskTimer(plugin, 0, 2);	
 	}
 	
 	  

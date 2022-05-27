@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Penguin.SuperChatReactions.files.ReactionFile;
+import me.Penguin.SuperChatReactions.files.Usermap;
 import me.Penguin.SuperChatReactions.util.config;
 import me.Penguin.SuperChatReactions.util.m;
 
@@ -23,10 +24,10 @@ public class Main extends JavaPlugin {
 	public static String word;
 	public static Instant start;
 	
-	
 	public void onEnable() {				
 		Logger log = this.getLogger();
 		ReactionFile reactionfile = new ReactionFile();
+		Usermap usermap = new Usermap();
 		Instant Ia = Instant.now();
 		
 		log.info("Preparing...");	
@@ -34,7 +35,7 @@ public class Main extends JavaPlugin {
 		m.setup();
 		config.setup();
 		reactionfile.setupWithHeadings("UUID", "Name", "Word", "Time");
-		
+		usermap.setupWithHeadings("UUID", "ID", "Name");		
 		log.info("Loaded Files");
 		
 		new MainListener(this);
